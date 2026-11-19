@@ -28,7 +28,7 @@ function collect(){
  const p=$('#player');let lives=3,jumping=false,jumpTimer=null,invulnerable=false;
  function shift(d){
   const previous=move;move=Math.max(0,Math.min(91,move+d));
-  const crossedBucket=previous<39&&move>=39||previous>45&&move<=45;
+  const crossedBucket=Math.max(previous,move)>=39&&Math.min(previous,move)<=45;
   if(crossedBucket&&!jumping&&!invulnerable){
    lives--;move=previous<42?34:49;invulnerable=true;
    $('#collect-status').textContent='¡Te tropezaste con el balde! Vidas: '+lives;
