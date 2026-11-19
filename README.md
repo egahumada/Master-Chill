@@ -1,4 +1,4 @@
-# MASTER CHILL — prototipo 0.2
+# MASTER CHILL — prototipo 0.3
 
 Juego web HTML5 estático. No requiere instalación, servidor backend ni compilación.
 
@@ -13,8 +13,13 @@ Abre `index.html` en un navegador moderno. La tipografía se carga desde Google 
 5. En **Settings → Pages**, selecciona **Deploy from a branch**, rama `main`, carpeta `/ (root)`, y guarda.
 
 ## Controles
-- Despensa: flechas izquierda/derecha o A/D; espacio para recoger. También hay botones en pantalla.
+- Despensa: flechas izquierda/derecha o A/D para moverte; flecha arriba o W para saltar; espacio para recoger. También hay botones en pantalla.
 - Corte, versus y torre: botones en pantalla.
+
+## Novedades 0.3
+- El chef ahora puede saltar con animación para esquivar el balde.
+- El balde funciona como obstáculo: chocar resta una vida y te hace retroceder.
+- La despensa muestra tres vidas y permite reintentar al agotarlas.
 
 ## Novedades 0.2
 - Se incorpora un espacio de comentarios del jurado durante los desafíos.
