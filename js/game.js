@@ -102,7 +102,7 @@ function create(){
   // Cocina lateral: azulejos, campana, repisas, hornos y mesón.
   const g=scene.add.graphics();
   g.fillGradientStyle(0x482b54,0x482b54,0x2c1b35,0x2c1b35,1);g.fillRect(0,0,960,310);
-  for(let x=0;x<960;x+=80){g.lineStyle(2,0x21162a,.45);g.lineBetween(x,0,x,300;}
+  for(let x=0;x<960;x+=80){g.lineStyle(2,0x21162a,.45);g.lineBetween(x,0,x,300);}
   for(let y=45;y<300;y+=55){g.lineStyle(2,0x21162a,.45);g.lineBetween(0,y,960,y);}
   g.fillStyle(0x5a3a42,1);g.fillRect(0,302,960,118);
   g.fillStyle(0xb8794c,1);g.fillRect(0,320,960,20);g.fillStyle(0x392638,1);g.fillRect(0,340,960,80);
@@ -135,24 +135,25 @@ function create(){
 function setupFighter(f){return f;}
 function createFighter(scene,data,x,y,tint,isPlayer){
   const container=scene.add.container(x,y);
-  const shadow=scene.add.ellipse(0,36,78,15,0x100b13,.45);
-  const art=scene.add.graphics();
-  // Diseño temporal de luchador arcade: mandil, chaqueta, cabeza, guantes y utensilio.
-  art.fillStyle(0x17101b,1);art.fillRoundedRect(-24,-91,48,88,10);
-  art.fillStyle(tint,1);art.fillRoundedRect(-23,-87,46,47,8);
-  art.fillStyle(0xfff1d7,1);art.fillRoundedRect(-17,-45,34,39,4);
-  art.lineStyle(3,0x382238,1);art.strokeRoundedRect(-17,-45,34,39,4);
-  art.fillStyle(0xf0bd91,1);art.fillCircle(0,-105,24);
-  art.fillStyle(0x28202b,1);art.fillEllipse(0,-123,43,17);
-  art.fillStyle(0x17101b,1);art.fillCircle(-8,-107,3);art.fillCircle(8,-107,3);
-  art.lineStyle(2,0x7d342e,1);art.beginPath();art.arc(0,-98,8,.2,Math.PI-.2,false);art.strokePath();
-  art.fillStyle(0x21152a,1);art.fillRoundedRect(-21,-8,17,34,5);art.fillRoundedRect(4,-8,17,34,5);
-  art.fillStyle(0xf0bd91,1);art.fillCircle(-31,-61,10);art.fillCircle(31,-61,10);
-  art.fillStyle(0xbfc5ce,1);art.fillRoundedRect(isPlayer?28:-42,-84,9,43,4);art.fillCircle(isPlayer?32:-38,-87,11);
-  container.add([shadow,art]);container.setSize(60,120);
-  const body=scene.physics.add.existing(container);body.body.setSize(42,90).setOffset(-21,-90);body.body.setCollideWorldBounds(true);body.body.setBounce(0);
-  const hit=scene.add.rectangle(x,y-65,1,1,0xff0000,0);scene.physics.add.existing(hit);hit.body.setAllowGravity(false);hit.body.enable=false;
-  return {sprite:container,body:container.body,art,hitbox:hit,health:100,stun:0,blocking:false,attackCooldown:0,specialCooldown:0,isPlayer,tint,data,face:isPlayer?1:-1,anim:0};
+  const shadow=scene.add.ellipse(0,2,88,16,0x100b13,.48);
+  let art;
+  if(data.sheet==='hugo'){
+    art=scene.add.image(0,-8,'don-hugo');
+    art.setCrop(0,0,331,325);
+  }else{
+    art=scene.add.image(0,-8,'roster-sheet');
+    art.setCrop(data.x,data.y,data.w,data.h);
+  }
+  art.setDisplaySize(116,136);
+  container.add([shadow,art]);
+  container.setSize(62,112);
+  scene.physics.add.existing(container);
+  container.body.setSize(58,108).setOffset(-29,-108);
+  container.body.setCollideWorldBounds(true);
+  container.body.setBounce(0);
+  const hit=scene.add.rectangle(x,y-65,1,1,0xff0000,0);
+  scene.physics.add.existing(hit);hit.body.setAllowGravity(false);hit.body.enable=false;
+  return {sprite:container,body:container.body,art,hitbox:hit,health:100,stun:0,blocking:false,attackCooldown:0,specialCooldown:0,isPlayer,tint,data,face:isPlayer?1:-1,anim:0,cpuMove:0};
 }
 function attack(scene,attacker,key){
   if(scene.finished||attacker.stun>0)return;
