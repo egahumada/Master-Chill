@@ -118,7 +118,7 @@ function create(){
   scene.add.text(480,62,'¡EL CAOS ESTÁ SERVIDO!',{fontFamily:'monospace',fontSize:'9px',color:'#35dfcc'}).setOrigin(.5);
   // Plataformas invisibles y suelo
   scene.physics.world.setBounds(20,0,920,420);
-  const floor=scene.physics.add.staticImage(480,395,undefined).setVisible(false);floor.body.setSize(920,30).updateFromGameObject();
+  const floor=scene.add.rectangle(480,395,960,50,0x000000,0);scene.physics.add.existing(floor,true);
   const p1=createFighter(scene,setupFighter(lastSetup.p1),230,350,0x24d6c2,true);
   const p2=createFighter(scene,setupFighter(lastSetup.p2),730,350,0xff6a55,false);
   scene.p1=p1;scene.p2=p2;scene.physics.add.collider(p1.sprite,floor);scene.physics.add.collider(p2.sprite,floor);
@@ -144,7 +144,7 @@ function createFighter(scene,data,x,y,tint,isPlayer){
     art=scene.add.image(0,-8,'roster-sheet');
     art.setCrop(data.x,data.y,data.w,data.h);
   }
-  art.setDisplaySize(116,136);
+  art.setDisplaySize(116,136);art.setOrigin(.5,1);art.setPosition(0,0);
   container.add([shadow,art]);
   container.setSize(62,112);
   scene.physics.add.existing(container);
