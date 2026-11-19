@@ -3,3 +3,9 @@
 
 .judge-comment{max-width:760px;margin:0 auto 16px;padding:13px 18px;border:2px solid var(--ink);border-radius:13px;background:#fff8ec;color:var(--ink);font-weight:900;text-align:center;box-shadow:4px 4px 0 var(--gold);min-height:48px}
 .judge-comment::before{content:"🎙️  COCINA Y REACT  ";color:var(--red);letter-spacing:1px;font-size:11px}
+
+.player{will-change:transform}.player.jumping{animation:chef-hop .62s ease-in-out}.player.bumped{animation:chef-bump .28s ease-in-out 2}
+@keyframes chef-hop{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-78px) rotate(-9deg)}65%{transform:translateY(-72px) rotate(8deg)}}
+@keyframes chef-bump{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px) rotate(-8deg)}75%{transform:translateX(9px) rotate(8deg)}}
+.controls button:active{transform:translateY(2px) scale(.97)}
+@media(max-width:520px){.controls button{padding:12px 13px;font-size:12px}.player{font-size:46px}.food{font-size:27px}}
