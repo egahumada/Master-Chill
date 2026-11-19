@@ -1,0 +1,71 @@
+/* MASTER-CHILL — dirección visual inspirada en juegos arcade web de combate.
+   Capa de tema independiente para poder ajustar la estética sin tocar la lógica Phaser. */
+:root{
+  --ink:#101014;--ink2:#1b1b22;--cream:#fff4df;--red:#e74732;--orange:#ff8b32;
+  --yellow:#ffd34e;--teal:#68d8c3;--purple:#45313a;--muted:#c4b7a8;--line:#55423c;
+}
+body{
+  background:#0d0d10;
+  background-image:linear-gradient(135deg,#171519 25%,transparent 25%),linear-gradient(225deg,#171519 25%,transparent 25%),linear-gradient(45deg,#171519 25%,transparent 25%),linear-gradient(315deg,#171519 25%,#0d0d10 25%);
+  background-position:12px 0,12px 0,0 0,0 0;background-size:24px 24px;background-repeat:repeat;
+}
+.page-shell{
+  max-width:1440px;padding:0 38px;background:linear-gradient(180deg,#19171a 0%,#211b1b 58%,#141316 100%);
+  border-color:#45302a;box-shadow:0 0 90px #000b;
+}
+.site-header{height:76px;border-color:#67432e}
+.brand-mark{background:var(--orange);color:#171114;box-shadow:4px 4px 0 var(--yellow);border-color:#09090b}
+.brand-type span{color:var(--orange)}.brand-type small{color:var(--yellow)}
+.header-right{color:#c8b6a4}.pixel-dot{background:var(--orange);box-shadow:0 0 12px #ff8b32}
+.header-version{color:var(--yellow)}
+main{min-height:700px;padding-top:30px}
+.eyebrow{color:var(--orange)}
+h1 span{color:var(--orange);text-shadow:5px 5px var(--red),8px 8px #08060a}
+h2 span{color:var(--orange)}
+.primary{background:var(--orange);color:#171114}
+.primary span{color:#fff0c7}
+.arcade-button{border-color:#09090b;box-shadow:5px 5px 0 #09090b}
+.hero-subtitle{color:#f5e4d1}
+.hero-art{
+  background:linear-gradient(#392b2a 0 60%,#9c6244 60%);
+  outline-color:var(--orange);box-shadow:10px 10px 0 #09090b;
+}
+.neon-sign{border-color:var(--orange);box-shadow:0 0 18px #ff8b3280}
+.neon-sign b{color:var(--orange)}
+.hood{background:#77777b;border-color:#21191a;box-shadow:inset 0 -13px #49484c}
+.shelf{background:#744638;border-color:#21191a}
+.stove{background:#5d5b5b;border-color:#21191a}
+.stove span{background:#ed7738;box-shadow:0 0 14px #ff8b24}
+.counter-front{background:repeating-linear-gradient(90deg,#8e553c 0 65px,#6c3e30 66px 70px);border-top-color:#e6b46a}
+.hero-tags span{color:var(--orange);border-color:#6b4a3d;background:#271e20}
+.feature-strip div{background:#292123;border-color:#654536}
+.feature-strip b{color:var(--orange)}
+footer span{color:var(--orange)}
+.text-back{color:var(--orange)}
+.text-back:hover{color:var(--yellow)}
+.mode-card{background:linear-gradient(145deg,#342729,#211a1d);border-color:#0a090b;box-shadow:7px 7px 0 #09090b}
+.mode-card:hover{border-color:var(--orange)}
+.mode-title em{color:var(--orange)}
+.mode-cta{color:var(--yellow)}
+.select-mode-label{color:var(--orange);border-color:#75503f}
+.difficulty-row select{background:#302326;color:var(--yellow);border-color:#75503f}
+.player-label{background:#2c2223;border-color:#624338}
+.player-label b{color:var(--orange)}
+.p2-label b{color:#ff7965}
+.fighter-card{background:#2b2223;border-color:#65483c}
+.fighter-card:hover{border-color:var(--orange)}
+.fighter-card.selected-p1{border-color:var(--teal)}
+.fighter-card.selected-p2{border-color:var(--red)}
+.fighter-card strong{color:var(--orange)}
+.fighter-card small{color:#d1c0b2}
+.round-badge,.timer-box{color:var(--yellow)}
+.timer-box{border-color:var(--orange);background:#2b2223}
+.fighter-name{color:var(--orange)}
+.game-container{outline-color:var(--orange);box-shadow:8px 8px 0 #09090b}
+.judge-bar{background:#2c2223;border-color:#72503e}
+.judge-mic{background:var(--orange)}
+.judge-bar b{color:var(--yellow)}
+.control-legend b{color:var(--orange)}
+.result-panel{background:#211a1d;border-color:var(--orange)}
+.result-panel h2{color:var(--orange)}
+@media(max-width:800px){.page-shell{padding:0 18px}}
