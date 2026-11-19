@@ -1,28 +1,122 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#172b2b"><title>MASTER CHILL — El caos está servido</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160f19">
+  <meta name="description" content="MASTER-CHILL: combate arcade 2D en la cocina más caótica.">
+  <title>MASTER-CHILL — El caos está servido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="app">
-<header class="top"><a class="logo" href="#inicio" aria-label="Master Chill inicio"><span class="logo-stamp">MC</span><span>MASTER <b>CHILL</b><small>EL CAOS ESTÁ SERVIDO</small></span></a><span class="top-note">COCINA · HUMOR · COMPETENCIA</span></header>
-<main>
-<section id="inicio" class="screen active">
- <div class="hero"><div class="hero-copy"><p class="eyebrow">EL CONCURSO MÁS DESCONTROLADO</p><h1>MASTER<br><em>CHILL</em></h1><p class="tagline">La cocina está que arde…<br>y los jueces también.</p><button class="btn primary" data-go="personajes">¡A COCINAR!</button><p class="tiny">PROTOTIPO 0.3 · ¡SALTA, ESQUIVA Y RECOGE!</p></div>
- <div class="hero-kitchen"><div class="wall-sign">COCINA<br><b>MASTER CHILL</b></div><div class="steam">〰　〰</div><div class="hero-chef">👩‍🍳</div><div class="hero-pot">🍲</div><div class="hero-counter"></div><span class="float-food f1">🥕</span><span class="float-food f2">🍅</span><span class="float-food f3">🧀</span></div></div>
- <div class="quick-modes"><div><b>01</b> RECOLECTA</div><div><b>02</b> CORTA</div><div><b>03</b> VERSUS</div><div><b>04</b> APILA</div></div>
-</section>
-<section id="personajes" class="screen"><button class="back" data-go="inicio">← INICIO</button><p class="eyebrow">ELIGE TU REPRESENTANTE</p><h2>¿Quién entra a la cocina?</h2><p class="muted">Personajes provisionales para esta primera versión. Los iremos reemplazando por caricaturas originales de los participantes.</p><div id="roster" class="roster"></div><button class="btn primary" id="to-modes">ELEGIR DESAFÍO →</button></section>
-<section id="modos" class="screen"><button class="back" data-go="personajes">← PERSONAJES</button><p class="eyebrow">HOY SE COCINA CON PRESIÓN</p><h2>Elige tu desafío</h2><div class="mode-grid">
-<button class="mode" data-mode="collect"><span>🥕</span><b>La despensa loca</b><small>Recoge ingredientes en la cocina y esquiva los cachureos.</small></button>
-<button class="mode" data-mode="cut"><span>🔪</span><b>Corte contrarreloj</b><small>Sigue la secuencia y completa cinco cortes antes de que se acabe el tiempo.</small></button>
-<button class="mode" data-mode="versus"><span>🥄</span><b>Duelo de cucharones</b><small>Compite contra un rival en una arena de cocina.</small></button>
-<button class="mode" data-mode="tower"><span>🎂</span><b>Torre de tortas</b><small>Apila capas y construye la torta más alta posible.</small></button>
-</div></section>
-<section id="juego" class="screen"><div class="gamebar"><button class="back" data-go="modos">← DESAFÍOS</button><div class="game-name"><b id="game-title">DESAFÍO</b><small id="game-help">¡A jugar!</small></div><div class="scorebox">PUNTOS <b id="score">0</b></div></div><div id="game-area" class="game-area"></div><div id="judge-comment" class="judge-comment" aria-live="polite">Yann: ¡Que comience la cocina!</div><div id="game-controls" class="controls"></div><p class="game-foot">MASTER CHILL · QUE NO SE TE QUEME</p></section>
-</main>
-<footer>MASTER CHILL es un proyecto independiente de parodia y entretenimiento. No es oficial ni está afiliado a ningún programa de televisión.</footer>
-</div><script src="js/game.js"></script>
-</body></html>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#" data-screen="home" aria-label="Master-Chill inicio">
+        <span class="brand-mark">MC</span>
+        <span class="brand-type">MASTER<span>-CHILL</span><small>EL CAOS ESTÁ SERVIDO</small></span>
+      </a>
+      <div class="header-right"><span class="pixel-dot"></span> ARCADE DE COCINA <span class="header-version">V1.0 · VS</span></div>
+    </header>
+
+    <main>
+      <section id="home-screen" class="screen active">
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">EL TORNEO MÁS SABROSO Y PELIGROSO</p>
+            <h1>MASTER<br><span>-CHILL</span></h1>
+            <p class="hero-subtitle">¡La cocina está que arde<br>y aquí se pelea por el cucharón!</p>
+            <button class="arcade-button primary" id="start-button">PRESIONA START <span>▶</span></button>
+            <div class="hero-tags"><span>2D FIGHTING</span><span>PLAYER VS CPU</span><span>LOCAL VS</span></div>
+          </div>
+          <div class="hero-art" aria-label="Arena de cocina pixel art">
+            <div class="neon-sign">COCINA<br><b>MASTER-CHILL</b></div>
+            <div class="hood hood-one"></div><div class="hood hood-two"></div>
+            <div class="shelf"><i>🍅</i><i>🧂</i><i>🥕</i><i>🫙</i></div>
+            <div class="stove"><span></span><span></span><span></span></div>
+            <div class="flame flame-a">♨</div><div class="flame flame-b">♨</div>
+            <div class="counter-front"></div>
+            <div class="pan pan-one">🍳</div><div class="pan pan-two">🥘</div>
+            <div class="floor-tiles"></div>
+            <div class="hero-caption">ROUND 1 · ¡A DARLE CON TODO!</div>
+          </div>
+        </div>
+        <div class="feature-strip">
+          <div><b>01</b><span>ELIGE TU LUCHADOR</span></div>
+          <div><b>02</b><span>ENTRA A LA COCINA</span></div>
+          <div><b>03</b><span>¡GANA EL VERSUS!</span></div>
+        </div>
+        <p class="disclaimer">Proyecto independiente de parodia y entretenimiento. No es oficial ni está afiliado a MasterChef Chile.</p>
+      </section>
+
+      <section id="mode-screen" class="screen">
+        <button class="text-back" data-screen="home">← VOLVER</button>
+        <p class="eyebrow">SELECCIONA TU MODO DE COMBATE</p>
+        <h2>¿CON QUIÉN TE VAS A <span>AGARRAR?</span></h2>
+        <div class="mode-cards">
+          <button class="mode-card" data-mode="cpu">
+            <div class="mode-icon">🤖</div><div class="mode-title">JUGADOR <em>VS</em> CPU</div>
+            <p>Enfréntate a un rival controlado por la cocina. Elige dificultad y demuestra quién manda.</p>
+            <span class="mode-cta">UN JUGADOR · ARCADE →</span>
+          </button>
+          <button class="mode-card" data-mode="local">
+            <div class="mode-icon">🥊</div><div class="mode-title">JUGADOR 1 <em>VS</em> JUGADOR 2</div>
+            <p>Desafía a alguien en el mismo computador. Dos luchadores, una cocina y cero excusas.</p>
+            <span class="mode-cta">DOS JUGADORES · LOCAL →</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="select-screen" class="screen">
+        <button class="text-back" data-screen="mode">← MODOS</button>
+        <div class="select-heading">
+          <div><p class="eyebrow">ARMA TU COMBATE</p><h2>ELIGE TU <span>LUCHADOR</span></h2></div>
+          <div class="select-mode-label" id="select-mode-label">PLAYER VS CPU</div>
+        </div>
+        <div class="difficulty-row" id="difficulty-row">
+          <label for="difficulty">DIFICULTAD DE LA CPU</label>
+          <select id="difficulty"><option value="easy">FÁCIL</option><option value="normal" selected>NORMAL</option><option value="hard">DIFÍCIL</option></select>
+        </div>
+        <div class="player-select-labels">
+          <div class="player-label p1-label"><b>1P</b><span id="p1-choice-name">ELIGE TU LUCHADOR</span></div>
+          <div class="player-label p2-label"><b>2P</b><span id="p2-choice-name">RIVAL CPU</span></div>
+        </div>
+        <div id="roster" class="roster-grid"></div>
+        <div class="select-actions"><p id="select-instruction">Selecciona un personaje para el Jugador 1.</p><button id="fight-button" class="arcade-button primary" disabled>¡A PELEAR! ▶</button></div>
+      </section>
+
+      <section id="fight-screen" class="screen">
+        <div class="fight-topline">
+          <button class="text-back" id="quit-fight">← SALIR DEL COMBATE</button>
+          <div class="round-badge">ROUND <b>01</b></div>
+          <div class="timer-box" id="round-timer">90</div>
+        </div>
+        <div class="health-row">
+          <div class="health-side"><div class="fighter-name" id="hud-p1-name">JUGADOR 1</div><div class="health-track"><div class="health-fill p1-health" id="health-p1"></div></div></div>
+          <div class="vs-mark">VS</div>
+          <div class="health-side right"><div class="fighter-name" id="hud-p2-name">CPU</div><div class="health-track"><div class="health-fill p2-health" id="health-p2"></div></div></div>
+        </div>
+        <div id="game-container" class="game-container">
+          <div id="game-loading">PREPARANDO LA COCINA…</div>
+        </div>
+        <div class="judge-bar">
+          <div class="judge-mic">MIC</div><div><b id="judge-name">JURADO MASTER-CHILL</b><p id="judge-line">¡Que comience el combate! Quiero técnica y sazón.</p></div>
+        </div>
+        <div class="control-legend" id="control-legend">
+          <span><b>A / D</b> MOVER</span><span><b>W</b> SALTAR</span><span><b>F</b> GOLPE</span><span><b>G</b> PATADA</span><span><b>H</b> ESPECIAL</span><span><b>S</b> BLOQUEAR</span>
+        </div>
+      </section>
+    </main>
+    <footer><span>MASTER-CHILL</span> · HECHO PARA JUGAR · <span>EL CAOS ESTÁ SERVIDO</span></footer>
+  </div>
+
+  <div id="result-overlay" class="result-overlay" aria-hidden="true">
+    <div class="result-panel"><p class="eyebrow">FIN DEL COMBATE</p><div class="result-stamp">K.O.</div><h2 id="result-title">¡VICTORIA!</h2><p id="result-copy">La cocina tiene nuevo campeón.</p><div class="result-actions"><button class="arcade-button primary" id="rematch-button">REVANCHA ↻</button><button class="arcade-button secondary" id="menu-button">MENÚ PRINCIPAL</button></div></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
