@@ -1,4 +1,4 @@
-# MASTER CHILL — prototipo 0.1
+# MASTER CHILL — prototipo 0.2
 
 Juego web HTML5 estático. No requiere instalación, servidor backend ni compilación.
 
@@ -16,5 +16,11 @@ Abre `index.html` en un navegador moderno. La tipografía se carga desde Google 
 - Despensa: flechas izquierda/derecha o A/D; espacio para recoger. También hay botones en pantalla.
 - Corte, versus y torre: botones en pantalla.
 
+## Novedades 0.2
+- Se incorpora un espacio de comentarios del jurado durante los desafíos.
+- Yann, Fernanda y Juanma tienen líneas de diálogo originales para el prototipo.
+- Yuhui y Fran aparecen ocasionalmente con comentarios ficticios del segmento React. No son citas textuales ni reproducciones de frases reales.
+- En la despensa ahora hay que acercarse a un ingrediente para recogerlo; cada ingrediente desaparece al obtenerlo.
+
 ## Estado
-Versión inicial jugable de demostración. Los ocho avatares son personajes genéricos provisionales, no retratos de participantes reales. Los modos son prototipos de mecánica y se irán ampliando.
+Versión de demostración jugable. Los ocho avatares son personajes genéricos provisionales, no retratos de participantes reales. Los diálogos son textos originales de parodia y podrán ajustarse con frases que el usuario proporcione.
