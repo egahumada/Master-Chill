@@ -1,31 +1,49 @@
-# MASTER CHILL — prototipo 0.3
+# MASTER-CHILL — Versus V1
 
-Juego web HTML5 estático. No requiere instalación, servidor backend ni compilación.
+Videojuego web de combate arcade 2D, independiente y de parodia. Esta versión reemplaza el prototipo de minijuegos por una primera modalidad VS.
 
-## Probar localmente
-Abre `index.html` en un navegador moderno. La tipografía se carga desde Google Fonts; si no hay conexión se usan fuentes de respaldo.
-
-## Publicar en GitHub Pages
-1. Descomprime el ZIP.
-2. En el repositorio `egahumada/Master-Chill`, entra a **Add file → Upload files**.
-3. Sube el contenido de esta carpeta (index.html, css/, js/, README.md), no la carpeta contenedora.
-4. Haz commit en la rama `main`.
-5. En **Settings → Pages**, selecciona **Deploy from a branch**, rama `main`, carpeta `/ (root)`, y guarda.
+## Modos disponibles
+- **Jugador vs CPU:** dificultad fácil, normal y difícil.
+- **Jugador 1 vs Jugador 2:** dos personas en el mismo computador.
 
 ## Controles
-- Despensa: flechas izquierda/derecha o A/D para moverte; flecha arriba o W para saltar; espacio para recoger. También hay botones en pantalla.
-- Corte, versus y torre: botones en pantalla.
 
-## Novedades 0.3
-- El chef ahora puede saltar con animación para esquivar el balde.
-- El balde funciona como obstáculo: chocar resta una vida y te hace retroceder.
-- La despensa muestra tres vidas y permite reintentar al agotarlas.
+### Jugador 1
+- A / D: moverse.
+- W: saltar.
+- S: bloquear.
+- F: golpe.
+- G: patada.
+- H: ataque especial.
 
-## Novedades 0.2
-- Se incorpora un espacio de comentarios del jurado durante los desafíos.
-- Yann, Fernanda y Juanma tienen líneas de diálogo originales para el prototipo.
-- Yuhui y Fran aparecen ocasionalmente con comentarios ficticios del segmento React. No son citas textuales ni reproducciones de frases reales.
-- En la despensa ahora hay que acercarse a un ingrediente para recogerlo; cada ingrediente desaparece al obtenerlo.
+### Jugador 2 (modo local)
+- Flechas izquierda / derecha: moverse.
+- Flecha arriba: saltar.
+- Flecha abajo: bloquear.
+- J: golpe.
+- K: patada.
+- L: ataque especial.
 
-## Estado
-Versión de demostración jugable. Los ocho avatares son personajes genéricos provisionales, no retratos de participantes reales. Los diálogos son textos originales de parodia y podrán ajustarse con frases que el usuario proporcione.
+## Personajes y arte
+La selección utiliza recortes de las ilustraciones originales almacenadas en assets/characters/. Se conserva el arte original. En combate se muestran como imágenes estáticas con movimiento, desplazamiento, salto y reacciones; todavía no hay spritesheets completos de animación cuadro a cuadro.
+
+## Escenario
+Arena lateral de cocina con mesones, hornos, campanas, utensilios y letrero MASTER-CHILL. Los jueces entregan comentarios originales durante el combate.
+
+## Tecnología
+- Phaser 3.80.1 (cargado desde CDN).
+- HTML, CSS y JavaScript.
+- Sin backend; preparado para alojamiento estático en GitHub Pages.
+- Requiere conexión a Internet para cargar Phaser desde CDN y las fuentes web.
+
+## Ejecutar
+Abre index.html mediante un servidor estático local o publícalo mediante GitHub Pages. Para evitar restricciones del navegador con recursos, es preferible usar un servidor HTTP local en lugar de abrir el archivo directamente.
+
+## Publicar
+En GitHub, configura Settings → Pages → Deploy from a branch → main → /(root) una vez que los cambios sean revisados y fusionados a main.
+
+## Estado de esta entrega
+Primera implementación de combate VS en una rama de desarrollo. Se recomienda probar los dos modos en navegador y ajustar las físicas y controles antes de fusionarla a main.
+
+## Nota
+MASTER-CHILL es un proyecto independiente de parodia y entretenimiento. No es oficial ni está afiliado a ningún programa de televisión. Los diálogos del jurado son originales y no se presentan como citas textuales.
