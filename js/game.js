@@ -7,6 +7,7 @@
 const ROOT = 'assets/characters/';
 const SHEET = ROOT + 'Gemini_Generated_Image_h1t0coh1t0coh1t0.jfif';
 const JUDGES_SHEET = ROOT + 'Gemini_Generated_Image_62z0t462z0t462z0.jfif';
+const EXTRA_SHEET = ROOT + 'Gemini_Generated_Image_pm94tepm94tepm94.jfif';
 
 const fighters = [
   {id:'kenny',name:'SEBASTIÁN “KENNY”',style:'Velocidad',sheet:'main',x:0,y:0,w:340,h:350,tint:0xffd66b},
@@ -17,7 +18,15 @@ const fighters = [
   {id:'valentina',name:'VALENTINA',style:'Velocidad',sheet:'main',x:272,y:370,w:272,h:350,tint:0x91d9ff},
   {id:'nattida',name:'NATTIDA',style:'Equilibrio',sheet:'main',x:544,y:370,w:272,h:350,tint:0xffa6bd},
   {id:'nicolas',name:'NICOLÁS',style:'Potencia',sheet:'main',x:816,y:370,w:272,h:350,tint:0x8ed9c5},
-  {id:'stana',name:'STANA',style:'Velocidad',sheet:'main',x:1088,y:370,w:272,h:350,tint:0xe9b0ff}
+  {id:'stana',name:'STANA',style:'Velocidad',sheet:'main',x:1088,y:370,w:272,h:350,tint:0xe9b0ff},
+  // Personajes de la segunda lámina de participantes (1200 × 900).
+  {id:'ariel',name:'ARIEL',style:'Potencia',sheet:'extra',x:0,y:100,w:300,h:360,col:0,row:0,tint:0x9fc8ff},
+  {id:'felipe',name:'FELIPE',style:'Equilibrio',sheet:'extra',x:600,y:100,w:300,h:360,col:2,row:0,tint:0xb7d5ff},
+  {id:'fernanda',name:'FERNANDA',style:'Técnica',sheet:'extra',x:900,y:100,w:300,h:360,col:3,row:0,tint:0xffb5c8},
+  {id:'america',name:'AMÉRICA',style:'Experiencia',sheet:'extra',x:0,y:460,w:300,h:360,col:0,row:1,tint:0xc4e58c},
+  {id:'franchesca',name:'FRANCHESCA',style:'Velocidad',sheet:'extra',x:300,y:460,w:300,h:360,col:1,row:1,tint:0xd9b5ff},
+  {id:'don-jona',name:'DON JONA',style:'Potencia',sheet:'extra',x:600,y:460,w:300,h:360,col:2,row:1,tint:0xe6c28b},
+  {id:'luis',name:'LUIS “SANTO CHOCOLATE”',style:'Técnica',sheet:'extra',x:900,y:460,w:300,h:360,col:3,row:1,tint:0xd9b47b}
 ];
 const screens = [...document.querySelectorAll('.screen')];
 const $ = s => document.querySelector(s);
@@ -50,6 +59,10 @@ function renderRoster(){
     if(f.sheet==='hugo'){
       el.style.backgroundImage='url("'+ROOT+'Don%20Hugo.png")';
       el.style.backgroundSize='contain';el.style.backgroundPosition='center bottom';el.style.backgroundRepeat='no-repeat';
+    }else if(f.sheet==='extra'){
+      el.style.backgroundImage='url("'+EXTRA_SHEET+'")';
+      el.style.backgroundSize='400% 200%';
+      el.style.backgroundPosition=(f.col/3*100)+'% '+(f.row*100)+'%';
     }else{
       el.style.backgroundImage='url("'+SHEET+'")';
       el.style.backgroundSize='400% 200%';
@@ -95,6 +108,7 @@ function preload(){
   this.load.image('roster-sheet',SHEET);
   this.load.image('don-hugo',ROOT+'Don%20Hugo.png');
   this.load.image('judges-sheet',JUDGES_SHEET);
+  this.load.image('extra-sheet',EXTRA_SHEET);
   this.load.on('loaderror',file=>console.warn('No se pudo cargar recurso:',file.key,file.src));
 }
 function create(){
@@ -140,6 +154,9 @@ function createFighter(scene,data,x,y,tint,isPlayer){
   if(data.sheet==='hugo'){
     art=scene.add.image(0,-8,'don-hugo');
     art.setCrop(0,0,331,325);
+  }else if(data.sheet==='extra'){
+    art=scene.add.image(0,-8,'extra-sheet');
+    art.setCrop(data.x,data.y,data.w,data.h);
   }else{
     art=scene.add.image(0,-8,'roster-sheet');
     art.setCrop(data.x,data.y,data.w,data.h);
