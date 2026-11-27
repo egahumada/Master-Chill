@@ -45,6 +45,7 @@ h2 span{color:var(--yellow)}
 footer{border-top:1px solid var(--line);padding:19px 0;font:8px 'Press Start 2P';line-height:2}footer span{color:var(--yellow)}
 .text-back{border:0;background:none;color:var(--teal);font:9px 'Press Start 2P';cursor:pointer;padding:0;margin-bottom:27px}.text-back:hover{color:var(--yellow)}
 .mode-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:40px}
+.mode-cards.single-mode{grid-template-columns:minmax(280px,560px);justify-content:center}
 .mode-card{background:linear-gradient(145deg,#30203a,#21152a);color:var(--cream);text-align:left;border:3px solid #08060a;box-shadow:7px 7px 0 #08060a;padding:25px;cursor:pointer;min-height:260px;transition:.15s}
 .mode-card:hover{border-color:var(--yellow);transform:translateY(-4px)}.mode-icon{font-size:46px;margin-bottom:20px}.mode-title{font:14px 'Press Start 2P';line-height:1.8}.mode-title em{color:var(--red);font-style:normal}.mode-card p{font-size:14px;color:#c7b7c8;line-height:1.5;max-width:430px}.mode-cta{display:block;margin-top:25px;color:var(--teal);font:8px 'Press Start 2P'}
 .select-heading{display:flex;justify-content:space-between;align-items:end;gap:20px}.select-mode-label{font:8px 'Press Start 2P';color:var(--yellow);border:1px solid #69476e;padding:12px}
