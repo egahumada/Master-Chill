@@ -29,7 +29,7 @@
             <h1>MASTER<br><span>-CHILL</span></h1>
             <p class="hero-subtitle">¡La cocina está que arde<br>y aquí se pelea por el cucharón!</p>
             <button class="arcade-button primary" id="start-button">PRESIONA START <span>▶</span></button>
-            <div class="hero-tags"><span>2D FIGHTING</span><span>PLAYER VS CPU</span><span>LOCAL VS</span></div>
+            <div class="hero-tags"><span>2D FIGHTING</span><span>1 PLAYER VS PC</span><span>ARCADE</span></div>
           </div>
           <div class="hero-art" aria-label="Arena de cocina pixel art">
             <div class="neon-sign">COCINA<br><b>MASTER-CHILL</b></div>
@@ -55,16 +55,11 @@
         <button class="text-back" data-screen="home">← VOLVER</button>
         <p class="eyebrow">SELECCIONA TU MODO DE COMBATE</p>
         <h2>¿CON QUIÉN TE VAS A <span>AGARRAR?</span></h2>
-        <div class="mode-cards">
+        <div class="mode-cards single-mode">
           <button class="mode-card" data-mode="cpu">
-            <div class="mode-icon">🤖</div><div class="mode-title">JUGADOR <em>VS</em> CPU</div>
-            <p>Enfréntate a un rival controlado por la cocina. Elige dificultad y demuestra quién manda.</p>
+            <div class="mode-icon">🤖</div><div class="mode-title">1P <em>VS</em> PC</div>
+            <p>Enfréntate a un rival controlado por la computadora. Elige dificultad y demuestra quién manda en la cocina.</p>
             <span class="mode-cta">UN JUGADOR · ARCADE →</span>
-          </button>
-          <button class="mode-card" data-mode="local">
-            <div class="mode-icon">🥊</div><div class="mode-title">JUGADOR 1 <em>VS</em> JUGADOR 2</div>
-            <p>Desafía a alguien en el mismo computador. Dos luchadores, una cocina y cero excusas.</p>
-            <span class="mode-cta">DOS JUGADORES · LOCAL →</span>
           </button>
         </div>
       </section>
@@ -81,7 +76,7 @@
         </div>
         <div class="player-select-labels">
           <div class="player-label p1-label"><b>1P</b><span id="p1-choice-name">ELIGE TU LUCHADOR</span></div>
-          <div class="player-label p2-label"><b>2P</b><span id="p2-choice-name">RIVAL CPU</span></div>
+          <div class="player-label p2-label"><b>PC</b><span id="p2-choice-name">RIVAL CPU</span></div>
         </div>
         <div id="roster" class="roster-grid"></div>
         <div class="select-actions"><p id="select-instruction">Selecciona un personaje para el Jugador 1.</p><button id="fight-button" class="arcade-button primary" disabled>¡A PELEAR! ▶</button></div>
