@@ -30,7 +30,7 @@ const fighters = [
 ];
 const screens = [...document.querySelectorAll('.screen')];
 const $ = s => document.querySelector(s);
-let mode='cpu', selected1=0, selected2=1, choosingPlayer=1, game=null, lastSetup=null, resultShown=false;
+let mode='cpu', selected1=0, selected2=1, game=null, lastSetup=null, resultShown=false;
 const judges = [
   {name:'YANN',lines:['¡La técnica, chef! ¡No estamos jugando a la pinta!','¡Eso estuvo crudo! ¡Necesito carácter!','¡Bien ejecutado! Ahora repítelo bajo presión.']},
   {name:'FERNANDA',lines:['Buena energía, pero cuida la precisión.','Ese movimiento necesitaba un poquito más de equilibrio.','Me gustó esa combinación. ¡Muy limpia!']},
@@ -40,18 +40,18 @@ function showScreen(id){screens.forEach(s=>s.classList.toggle('active',s.id===id
 document.querySelectorAll('[data-screen]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.screen)));
 $('#start-button').addEventListener('click',()=>showScreen('mode'));
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{
-  mode=b.dataset.mode;selected1=0;selected2=1;choosingPlayer=1;
-  $('#select-mode-label').textContent=mode==='cpu'?'PLAYER VS CPU':'PLAYER 1 VS PLAYER 2';
-  $('#difficulty-row').style.display=mode==='cpu'?'flex':'none';
-  $('#p2-choice-name').textContent=mode==='cpu'?'CPU · '+fighters[selected2].name:'ELIGE JUGADOR 2';
-  $('#p1-choice-name').textContent='ELIGE JUGADOR 1';
-  $('#select-instruction').textContent='Selecciona un personaje para el Jugador 1.';
+  mode='cpu';selected1=0;selected2=1;
+  $('#select-mode-label').textContent='1P VS PC';
+  $('#difficulty-row').style.display='flex';
+  $('#p2-choice-name').textContent='PC · '+fighters[selected2].name;
+  $('#p1-choice-name').textContent='ELIGE TU LUCHADOR';
+  $('#select-instruction').textContent='Selecciona tu personaje. La computadora elegirá automáticamente a su rival.';
   $('#fight-button').disabled=true;renderRoster();showScreen('select');
 }));
 function renderRoster(){
   const root=$('#roster');
   root.innerHTML=fighters.map((f,i)=>{
-    const p1=i===selected1?'selected-p1':'',p2=mode==='local'&&i===selected2?'selected-p2':'';
+    const p1=i===selected1?'selected-p1':'',p2='';
     return '<button class="fighter-card '+p1+' '+p2+'" data-fighter="'+i+'" aria-label="Elegir '+f.name+'"><div class="portrait" data-portrait="'+i+'"></div><strong>'+f.name+'</strong><small>'+f.style+'</small></button>';
   }).join('');
   root.querySelectorAll('[data-portrait]').forEach(el=>{
@@ -75,14 +75,13 @@ function renderRoster(){
   });
   root.querySelectorAll('[data-fighter]').forEach(btn=>btn.addEventListener('click',()=>{
     const i=Number(btn.dataset.fighter);
-    if(mode==='cpu'){selected1=i;if(selected2===i)selected2=(i+1)%fighters.length;$('#p1-choice-name').textContent=fighters[selected1].name;$('#p2-choice-name').textContent='CPU · '+fighters[selected2].name;$('#select-instruction').textContent='Rival de CPU seleccionado automáticamente. ¡A pelear!';}
-    else if(choosingPlayer===1){selected1=i;choosingPlayer=2;$('#p1-choice-name').textContent=fighters[i].name;$('#select-instruction').textContent='Ahora selecciona el personaje del Jugador 2.';}
-    else{selected2=i;$('#p2-choice-name').textContent=fighters[i].name;$('#select-instruction').textContent='¡Combate listo! Pulsa A PELEAR.';}
-    renderRoster();$('#fight-button').disabled=mode==='local'&&choosingPlayer===2;
-    if(mode==='local'&&choosingPlayer===1)$('#fight-button').disabled=true;
-    if(mode==='local'&&choosingPlayer===2)$('#fight-button').disabled=true;
-    if(mode==='local'&&$('#p2-choice-name').textContent!=='ELIGE JUGADOR 2')$('#fight-button').disabled=false;
-    if(mode==='cpu')$('#fight-button').disabled=false;
+    selected1=i;
+    if(selected2===selected1)selected2=(selected1+1)%fighters.length;
+    $('#p1-choice-name').textContent=fighters[selected1].name;
+    $('#p2-choice-name').textContent='PC · '+fighters[selected2].name;
+    $('#select-instruction').textContent='Rival asignado automáticamente. Ajusta la dificultad y comienza el combate.';
+    renderRoster();
+    $('#fight-button').disabled=false;
   }));
 }
 $('#fight-button').addEventListener('click',()=>startFight());
@@ -96,11 +95,9 @@ function startFight(){
   const setup={mode,p1:fighters[selected1],p2:fighters[selected2],difficulty:$('#difficulty').value};
   lastSetup=setup;
   $('#hud-p1-name').textContent=setup.p1.name;
-  $('#hud-p2-name').textContent=(mode==='cpu'?'CPU · ':'2P · ')+setup.p2.name;
+  $('#hud-p2-name').textContent='PC · '+setup.p2.name;
   $('#health-p1').style.width='100%';$('#health-p2').style.width='100%';$('#round-timer').textContent='90';
-  $('#control-legend').innerHTML=mode==='cpu'
-    ?'<span><b>A / D</b> MOVER</span><span><b>W</b> SALTAR</span><span><b>F</b> GOLPE</span><span><b>G</b> PATADA</span><span><b>H</b> ESPECIAL</span><span><b>S</b> BLOQUEAR</span>'
-    :'<span><b>A / D</b> 1P MOVER</span><span><b>W</b> SALTAR</span><span><b>F / G / H</b> ATACAR</span><span><b>← / →</b> 2P MOVER</span><span><b>↑</b> SALTAR</span><span><b>J / K / L</b> ATACAR</span>';
+  $('#control-legend').innerHTML='<span><b>A / D</b> MOVER</span><span><b>W</b> SALTAR</span><span><b>F</b> GOLPE</span><span><b>G</b> PATADA</span><span><b>H</b> ESPECIAL</span><span><b>S</b> BLOQUEAR</span>';
   const config={type:Phaser.AUTO,parent:'game-container',width:960,height:420,backgroundColor:'#392343',physics:{default:'arcade',arcade:{gravity:{y:900},debug:false}},scale:{mode:Phaser.Scale.FIT,autoCenter:Phaser.Scale.CENTER_BOTH},scene:{preload,create,update}};
   game=new Phaser.Game(config);
 }
@@ -140,7 +137,7 @@ function create(){
   p1.sprite.setCollideWorldBounds(true);p2.sprite.setCollideWorldBounds(true);
   scene.cameras.main.setBounds(0,0,960,420);
   scene.time.addEvent({delay:1000,loop:true,callback:()=>{if(scene.finished)return;scene.roundTime--;$('#round-timer').textContent=String(scene.roundTime).padStart(2,'0');if(scene.roundTime<=0)endFight(scene,p1.health>=p2.health?1:2,'TIME UP');}});
-  scene.input.keyboard.on('keydown',ev=>{if(ev.repeat||scene.finished)return;const key=ev.key.toLowerCase();if(['f','g','h','j','k','l'].includes(key)){if(['f','g','h'].includes(key))attack(scene,p1,key);else if(mode==='local')attack(scene,p2,key);}});
+  scene.input.keyboard.on('keydown',ev=>{if(ev.repeat||scene.finished)return;const key=ev.key.toLowerCase();if(['f','g','h'].includes(key))attack(scene,p1,key);});
   scene.judgeTimer=scene.time.addEvent({delay:6500,loop:true,callback:()=>commentJudge()});
   $('#game-loading').style.display='none';
   commentJudge('¡Bienvenidos! ¡Que empiece el combate!');
@@ -208,25 +205,20 @@ function update(time,delta){
   const p1=s.p1,p2=s.p2,k=s.keys;
   p1.attackCooldown=Math.max(0,p1.attackCooldown-dt);p2.attackCooldown=Math.max(0,p2.attackCooldown-dt);
   p1.stun=Math.max(0,p1.stun-dt);p2.stun=Math.max(0,p2.stun-dt);
-  p1.blocking=k.S.isDown;p2.blocking=mode==='local'?k.DOWN.isDown:false;
+  p1.blocking=k.S.isDown;p2.blocking=false;
   let v1=0;if(p1.stun<=0){if(k.A.isDown)v1=-1;if(k.D.isDown)v1=1;}
   p1.body.setVelocityX(v1*(p1.blocking?95:230));if(Phaser.Input.Keyboard.JustDown(k.W)&&p1.body.blocked.down)p1.body.setVelocityY(-440);
-  if(mode==='local'){
-    let v2=0;if(p2.stun<=0){if(k.LEFT.isDown)v2=-1;if(k.RIGHT.isDown)v2=1;}
-    p2.body.setVelocityX(v2*(p2.blocking?95:230));if(Phaser.Input.Keyboard.JustDown(k.UP)&&p2.body.blocked.down)p2.body.setVelocityY(-440);
-  }else{
-    s.cpuThink-=dt;
-    if(s.cpuThink<=0&&p2.stun<=0){
-      s.cpuThink=160+Math.random()*160;
-      const dist=p1.sprite.x-p2.sprite.x,abs=Math.abs(dist),difficulty=lastSetup.difficulty;
-      const aggressiveness=difficulty==='hard'?.82:difficulty==='normal'?.62:.42;
-      if(abs>120)p2.cpuMove=Math.sign(dist);else p2.cpuMove=Math.random()<.25?-Math.sign(dist):0;
-      if(abs<150&&Math.random()<aggressiveness){attack(s,p2,Math.random()<(difficulty==='hard'?.32:.16)?'l':Math.random()<.5?'k':'j');}
-      if(difficulty!=='easy'&&Math.random()<.08&&p2.body.blocked.down)p2.body.setVelocityY(-410);
-      if(p1.sprite.x<p2.sprite.x)p2.face=-1;else p2.face=1;
-    }
-    const move=p2.cpuMove||0;p2.body.setVelocityX(p2.stun>0?0:move*(p2.blocking?75:190));
+  s.cpuThink-=dt;
+  if(s.cpuThink<=0&&p2.stun<=0){
+    s.cpuThink=160+Math.random()*160;
+    const dist=p1.sprite.x-p2.sprite.x,abs=Math.abs(dist),difficulty=lastSetup.difficulty;
+    const aggressiveness=difficulty==='hard'?.82:difficulty==='normal'?.62:.42;
+    if(abs>120)p2.cpuMove=Math.sign(dist);else p2.cpuMove=Math.random()<.25?-Math.sign(dist):0;
+    if(abs<150&&Math.random()<aggressiveness){attack(s,p2,Math.random()<(difficulty==='hard'?.32:.16)?'l':Math.random()<.5?'k':'j');}
+    if(difficulty!=='easy'&&Math.random()<.08&&p2.body.blocked.down)p2.body.setVelocityY(-410);
+    if(p1.sprite.x<p2.sprite.x)p2.face=-1;else p2.face=1;
   }
+  const move=p2.cpuMove||0;p2.body.setVelocityX(p2.stun>0?0:move*190);
   if(p1.sprite.x<p2.sprite.x){p1.face=1;p2.face=-1;}else{p1.face=-1;p2.face=1;}
   p1.sprite.setFlipX(p1.face<0);p2.sprite.setFlipX(p2.face<0);
   p1.anim+=dt;p2.anim+=dt;
